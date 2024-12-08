@@ -47,15 +47,24 @@ a {
   font-weight: bold;
 }
 
+.nav-routes {
+  margin-right: auto;
+}
+
+.nav {
+  display: flex;
+}
+
 .nav ul {
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
   text-decoration: none;
+  margin-bottom: 0px;
 }
 
-.nav li:first-child {
-  padding-left: 0;
+.nav-selected {
+  border-bottom: solid grey 1px;
 }
 
 ul {

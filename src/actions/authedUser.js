@@ -1,8 +1,9 @@
 export const SET_AUTHED_USER = "SET_AUTHED_USER";
 
-export function setAuthedUser(id) {
+export function setAuthedUser(payload) {
   return {
     type: SET_AUTHED_USER,
-    id,
+    id: payload?.id,
+    password: payload?.password,
   };
 }
