@@ -1,4 +1,4 @@
-# My Reads
+# Employee Polls
 
 Second and final project for Udacity course [React](https://www.udacity.com/course/react-nanodegree--nd019).
 
