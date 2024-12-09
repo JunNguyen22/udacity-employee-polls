@@ -8,12 +8,39 @@ body {
 a {
   text-decoration: none;
   color: #252525;
+  display: flex;
+  align-items: center;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+th {
+  background-color: lightgrey;
+}
+
+th,
+td {
+  border: solid lightgray 1px;
+  padding: 1em;
 }
 
 .container {
   max-width: 1000px;
   margin: 0 auto;
   padding: 10px;
+}
+
+.leaderBoard {
+  display: flex;
+  justify-content: center;
+  padding: 2em 4em;
+}
+
+.leaderBoard-name-plate {
+  display: flex;
 }
 
 .btn {
@@ -53,6 +80,7 @@ a {
 
 .nav {
   display: flex;
+  border-bottom: solid lightgrey 1px;
 }
 
 .nav ul {
@@ -61,10 +89,25 @@ a {
   justify-content: flex-start;
   text-decoration: none;
   margin-bottom: 0px;
+  margin-top: 0px;
 }
 
 .nav-selected {
-  border-bottom: solid grey 1px;
+  border-bottom: solid black 1px;
+}
+
+.nav-btn {
+  display: flex;
+  align-items: center;
+}
+
+.nav-btn:hover {
+  cursor: pointer;
+}
+
+.nav-user {
+  display: flex;
+  align-items: center;
 }
 
 ul {
@@ -75,12 +118,13 @@ li {
   list-style-type: none;
   padding: 10px;
   text-decoration: none;
+  display: flex;
 }
 
 .avatar {
-  height: 50px;
+  height: 35px;
   border-radius: 25px;
-  margin: 10px;
+  margin: 5px;
 }
 
 .tweet {

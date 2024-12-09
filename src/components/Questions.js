@@ -1,9 +1,10 @@
 import { connect } from "react-redux";
 
-const Questions = () => {
+const Questions = ({ questions }) => {
+  console.log("questions", { questions });
   return <div>Questions Page</div>;
 };
 
-const mapStateToProps = () => ({});
+const mapStateToProps = ({ questions }) => ({ questions });
 
 export default connect(mapStateToProps)(Questions);

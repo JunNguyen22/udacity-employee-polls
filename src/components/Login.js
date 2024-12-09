@@ -29,9 +29,7 @@ const Login = ({ dispatch, authedUser }) => {
           onClick={() => {
             setIsSubmitted(true);
             setErrorMessage(getErrorMessage(id, password));
-            dispatch(
-              setAuthedUser({ id: "sarahedo", password: "password123" })
-            );
+            dispatch(setAuthedUser({ id: "zoshikanlu", password: "pass246" }));
           }}
         >
           Login

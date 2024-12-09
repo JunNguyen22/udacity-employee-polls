@@ -3,12 +3,13 @@ import { Link, useLocation } from "react-router-dom";
 import { setAuthedUser } from "../actions/authedUser";
 import { ROUTES } from "../utils/routes_config";
 
-const Nav = ({ dispatch }) => {
+const Nav = ({ dispatch, authedUser, avatar }) => {
   const location = useLocation();
   console.log("test location: ", {
     location,
   });
 
+  console.log({ authedUser });
   const getSelected = (route) => {
     return location.pathname.includes(route) ? "nav-selected" : "";
   };
@@ -28,15 +29,23 @@ const Nav = ({ dispatch }) => {
       </ul>
 
       <ul>
-        <li>test</li>
+        <li className="nav-user">
+          <img
+            className="avatar"
+            src={avatar}
+            alt={`avatar of ${authedUser}`}
+          />
+          {authedUser}
+        </li>
         <li>
-          <button
+          <div
+            className="nav-btn"
             onClick={() => {
               dispatch(setAuthedUser());
             }}
           >
             Logout
-          </button>
+          </div>
         </li>
       </ul>
     </nav>
@@ -44,7 +53,8 @@ const Nav = ({ dispatch }) => {
 };
 
 const mapStateToProps = ({ authedUser, users, tweets }) => {
-  return {};
+  const avatar = users[authedUser].avatarURL;
+  return { authedUser, avatar };
 };
 
 export default connect(mapStateToProps)(Nav);
