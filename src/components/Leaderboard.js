@@ -33,7 +33,7 @@ const Leaderboard = ({ leaderBoardUsers }) => {
   );
 };
 
-const mapStateToProps = ({ users, questions }) => {
+const mapStateToProps = ({ users }) => {
   const leaderBoardUsers = Object.values(users).map((user) => {
     const questionsCount = user.questions.length;
     const answersCount = Object.keys(user.answers).length;

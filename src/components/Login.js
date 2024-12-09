@@ -9,7 +9,7 @@ const getErrorMessage = (id, password) => {
   return "Incorrect User or Password, please try again.";
 };
 
-const Login = ({ dispatch, authedUser }) => {
+const Login = ({ dispatch }) => {
   const [id, setId] = useState("");
   const [password, setPassword] = useState("");
   const [isSubmitted, setIsSubmitted] = useState(false);
@@ -20,7 +20,7 @@ const Login = ({ dispatch, authedUser }) => {
     setErrorMessage(getErrorMessage(id, password));
     if (id && password) {
     }
-    dispatch(setAuthedUser({ id: "zoshikanlu", password: "pass246" }));
+    dispatch(setAuthedUser({ id, password }));
   };
 
   return (
@@ -42,6 +42,6 @@ const Login = ({ dispatch, authedUser }) => {
   );
 };
 
-const mapStateToProps = ({ authedUser }) => ({ authedUser });
+const mapStateToProps = () => ({});
 
 export default connect(mapStateToProps)(Login);
