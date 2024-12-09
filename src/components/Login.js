@@ -27,16 +27,26 @@ const Login = ({ dispatch }) => {
     <div className="login">
       <div className="card title-card">Login</div>
       <div className="card">User</div>
-      <input onChange={(e) => setId(e.target.value)} />
+      <input placeholder="User" onChange={(e) => setId(e.target.value)} />
       <div className="card">Password</div>
-      <input onChange={(e) => setPassword(e.target.value)} type="password" />
+      <input
+        placeholder="Password"
+        onChange={(e) => setPassword(e.target.value)}
+        type="password"
+      />
       <div className="card">
-        <button className="btn" onClick={handleSubmit}>
+        <button
+          data-testid="login-submit"
+          className="btn"
+          onClick={handleSubmit}
+        >
           Login
         </button>
       </div>
       {isSubmitted ? (
-        <div className="error-text card">{errorMessage}</div>
+        <div data-testid="login-error-message" className="error-text card">
+          {errorMessage}
+        </div>
       ) : null}
     </div>
   );
@@ -45,3 +55,7 @@ const Login = ({ dispatch }) => {
 const mapStateToProps = () => ({});
 
 export default connect(mapStateToProps)(Login);
+
+export const forTestings = {
+  getErrorMessage,
+};

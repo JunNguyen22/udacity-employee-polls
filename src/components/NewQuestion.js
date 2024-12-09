@@ -63,3 +63,7 @@ const NewQuestion = ({ dispatch, router }) => {
 const mapStateToProps = () => ({});
 
 export default withRouter(connect(mapStateToProps)(NewQuestion));
+
+export const forTestings = {
+  getErrorMessage,
+};
