@@ -3,39 +3,41 @@ import { setAuthedUser } from "../actions/authedUser";
 import { useState } from "react";
 
 const getErrorMessage = (id, password) => {
-  let message = "Incorrect User or Password, please try again.";
   if (!id || !password) {
-    message = "Please fill in User and Password.";
+    return "Please fill in User and Password.";
   }
-  return message;
+  return "Incorrect User or Password, please try again.";
 };
 
 const Login = ({ dispatch, authedUser }) => {
-  console.log({ authedUser });
   const [id, setId] = useState("");
   const [password, setPassword] = useState("");
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
 
+  const handleSubmit = () => {
+    setIsSubmitted(true);
+    setErrorMessage(getErrorMessage(id, password));
+    if (id && password) {
+    }
+    dispatch(setAuthedUser({ id: "zoshikanlu", password: "pass246" }));
+  };
+
   return (
-    <div>
-      <div>Login</div>
-      <div>User</div>
+    <div className="login">
+      <div className="card title-card">Login</div>
+      <div className="card">User</div>
       <input onChange={(e) => setId(e.target.value)} />
-      <div>Password</div>
+      <div className="card">Password</div>
       <input onChange={(e) => setPassword(e.target.value)} type="password" />
-      <div>
-        <button
-          onClick={() => {
-            setIsSubmitted(true);
-            setErrorMessage(getErrorMessage(id, password));
-            dispatch(setAuthedUser({ id: "zoshikanlu", password: "pass246" }));
-          }}
-        >
+      <div className="card">
+        <button className="btn" onClick={handleSubmit}>
           Login
         </button>
       </div>
-      {isSubmitted ? <div>{errorMessage}</div> : null}
+      {isSubmitted ? (
+        <div className="error-text card">{errorMessage}</div>
+      ) : null}
     </div>
   );
 };

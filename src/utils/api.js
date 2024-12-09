@@ -1,4 +1,3 @@
-import { _saveLikeToggle, _saveTweet } from "./_DATA_tweet.js";
 import {
   _saveQuestion,
   _saveQuestionAnswer,
@@ -13,14 +12,6 @@ export function getInitialData() {
       questions,
     })
   );
-}
-
-export function saveLikeToggle(info) {
-  return _saveLikeToggle(info);
-}
-
-export function saveTweet(info) {
-  return _saveTweet(info);
 }
 
 export function saveQuestion(info) {

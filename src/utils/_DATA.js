@@ -3,7 +3,7 @@ let users = {
     id: "sarahedo",
     password: "password123",
     name: "Sarah Edo",
-    avatarURL: "https://i.pravatar.cc/150?img=5",
+    avatarURL: "https://i.pravatar.cc/300?img=5",
     answers: {
       "8xf0y6ziyjabvozdd253nd": "optionOne",
       "6ni6ok3ym7mf1p33lnez": "optionOne",
@@ -16,7 +16,7 @@ let users = {
     id: "tylermcginnis",
     password: "abc321",
     name: "Tyler McGinnis",
-    avatarURL: "https://i.pravatar.cc/150?img=8",
+    avatarURL: "https://i.pravatar.cc/300?img=8",
     answers: {
       vthrdm985a262al8qx3do: "optionOne",
       xj352vofupe1dqz9emx13r: "optionTwo",
@@ -27,7 +27,7 @@ let users = {
     id: "mtsamis",
     password: "xyz123",
     name: "Mike Tsamis",
-    avatarURL: "https://i.pravatar.cc/150?img=11",
+    avatarURL: "https://i.pravatar.cc/300?img=11",
     answers: {
       xj352vofupe1dqz9emx13r: "optionOne",
       vthrdm985a262al8qx3do: "optionTwo",
@@ -39,7 +39,7 @@ let users = {
     id: "zoshikanlu",
     password: "pass246",
     name: "Zenobia Oshikanlu",
-    avatarURL: "https://i.pravatar.cc/150?img=19",
+    avatarURL: "https://i.pravatar.cc/300?img=26",
     answers: {
       xj352vofupe1dqz9emx13r: "optionOne",
     },
@@ -174,10 +174,22 @@ export function _saveQuestion(question) {
     }
 
     const formattedQuestion = formatQuestion(question);
+
     setTimeout(() => {
       questions = {
         ...questions,
         [formattedQuestion.id]: formattedQuestion,
+      };
+
+      users = {
+        ...users,
+        [question.author]: {
+          ...users[question.author],
+          questions: [
+            ...users[question.author].questions,
+            formattedQuestion.id,
+          ],
+        },
       };
 
       resolve(formattedQuestion);
@@ -209,7 +221,7 @@ export function _saveQuestionAnswer({ authedUser, qid, answer }) {
           ...questions[qid],
           [answer]: {
             ...questions[qid][answer],
-            votes: questions[qid][answer].votes.concat([authedUser]),
+            votes: [...questions[qid][answer].votes, authedUser],
           },
         },
       };

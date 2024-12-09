@@ -3,27 +3,30 @@ import { Link, useLocation } from "react-router-dom";
 import { setAuthedUser } from "../actions/authedUser";
 import { ROUTES } from "../utils/routes_config";
 
-const Nav = ({ dispatch, authedUser, avatar }) => {
-  const location = useLocation();
-  console.log("test location: ", {
-    location,
-  });
+const withRouter = (Component) => {
+  const ComponentWithRouterProp = (props) => {
+    let location = useLocation();
+    return <Component {...props} router={{ location }} />;
+  };
 
-  console.log({ authedUser });
-  const getSelected = (route) => {
-    return location.pathname.includes(route) ? "nav-selected" : "";
+  return ComponentWithRouterProp;
+};
+
+const Nav = ({ dispatch, authedUser, avatar, router }) => {
+  const getSelected = (router, route) => {
+    return router.location.pathname.includes(route) ? "nav-selected" : "";
   };
 
   return (
     <nav className="nav">
       <ul className="nav-routes">
-        <li className={getSelected(ROUTES.QUESTIONS)}>
+        <li className={getSelected(router, ROUTES.QUESTIONS)}>
           <Link to={ROUTES.QUESTIONS}>Questions</Link>
         </li>
-        <li className={getSelected(ROUTES.LEADER_BOARD)}>
+        <li className={getSelected(router, ROUTES.LEADER_BOARD)}>
           <Link to={ROUTES.LEADER_BOARD}>Leaderboard</Link>
         </li>
-        <li className={getSelected(ROUTES.NEW_QUESTION)}>
+        <li className={getSelected(router, ROUTES.NEW_QUESTION)}>
           <Link to={ROUTES.NEW_QUESTION}>New</Link>
         </li>
       </ul>
@@ -52,9 +55,9 @@ const Nav = ({ dispatch, authedUser, avatar }) => {
   );
 };
 
-const mapStateToProps = ({ authedUser, users, tweets }) => {
+const mapStateToProps = ({ authedUser, users }) => {
   const avatar = users[authedUser].avatarURL;
   return { authedUser, avatar };
 };
 
-export default connect(mapStateToProps)(Nav);
+export default withRouter(connect(mapStateToProps)(Nav));

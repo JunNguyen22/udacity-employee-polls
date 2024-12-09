@@ -34,7 +34,6 @@ const Leaderboard = ({ leaderBoardUsers }) => {
 };
 
 const mapStateToProps = ({ users, questions }) => {
-  console.log("tests: ", { users, questions });
   const leaderBoardUsers = Object.values(users).map((user) => {
     const questionsCount = user.questions.length;
     const answersCount = Object.keys(user.answers).length;
@@ -45,8 +44,6 @@ const mapStateToProps = ({ users, questions }) => {
       total: questionsCount + answersCount,
     };
   });
-
-  console.log({ leaderBoardUsers });
   leaderBoardUsers.sort((a, b) => b.total - a.total);
   return {
     leaderBoardUsers,
