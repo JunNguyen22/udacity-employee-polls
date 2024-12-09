@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { formatDate } from "../utils/helpers";
 import { ROUTES } from "../utils/routes_config";
-import { Fragment } from "react";
+import { Fragment, useEffect, useState } from "react";
 
 const QuestionItem = ({ question }) => {
   const navigate = useNavigate();
@@ -25,14 +25,37 @@ const QuestionItem = ({ question }) => {
   );
 };
 
-const QuestionList = ({ title, questions }) => {
+const QuestionList = ({ titles, questions }) => {
+  const [activeTab, setActiveTab] = useState(0);
+  const [activeList, setActiveList] = useState([]);
+
+  useEffect(() => {
+    setActiveList(questions[activeTab]);
+  }, [activeTab]);
+
+  const handleChangeTab = (tab) => {
+    setActiveTab(tab);
+  };
+
   return (
     <div className="question-list">
-      <div className="header">{title}</div>
+      <div className="header">
+        <ul>
+          {titles.map((title, index) => (
+            <li
+              className={activeTab === index ? "selected-underline" : ""}
+              onClick={() => handleChangeTab(index)}
+              key={title}
+            >
+              {title}
+            </li>
+          ))}
+        </ul>
+      </div>
       <div className="body">
-        {questions.length ? (
+        {activeList.length ? (
           <Fragment>
-            {questions.map((question) => (
+            {activeList.map((question) => (
               <QuestionItem key={question.id} question={question} />
             ))}
           </Fragment>

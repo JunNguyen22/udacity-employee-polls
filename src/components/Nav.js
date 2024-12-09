@@ -14,7 +14,7 @@ const withRouter = (Component) => {
 
 const Nav = ({ dispatch, authedUser, avatar, router }) => {
   const getSelected = (router, route) => {
-    return router.location.pathname.includes(route) ? "nav-selected" : "";
+    return router.location.pathname.includes(route) ? "selected-underline" : "";
   };
 
   return (

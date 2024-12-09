@@ -4,4 +4,5 @@ export const ROUTES = {
   LEADER_BOARD: "/leaderboard",
   NEW_QUESTION: "/add",
   LOGIN: "/login",
+  NOT_FOUND: "/not-found",
 };

@@ -11,7 +11,13 @@ Object {
         <div
           class="header"
         >
-          test
+          <ul>
+            <li
+              class="selected-underline"
+            >
+              test
+            </li>
+          </ul>
         </div>
         <div
           class="body"
@@ -30,7 +36,13 @@ Object {
       <div
         class="header"
       >
-        test
+        <ul>
+          <li
+            class="selected-underline"
+          >
+            test
+          </li>
+        </ul>
       </div>
       <div
         class="body"

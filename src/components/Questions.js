@@ -4,8 +4,10 @@ import QuestionList from "./QuestionList";
 const Questions = ({ answeredQuestions, unansweredQuestions }) => {
   return (
     <div>
-      <QuestionList title="New Questions" questions={unansweredQuestions} />
-      <QuestionList title="Done" questions={answeredQuestions} />
+      <QuestionList
+        titles={["New Questions", "Done"]}
+        questions={{ 0: unansweredQuestions, 1: answeredQuestions }}
+      />
     </div>
   );
 };

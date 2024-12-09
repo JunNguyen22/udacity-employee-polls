@@ -4,7 +4,9 @@ import "@testing-library/jest-dom";
 
 describe("QuestionList", () => {
   it("snapshot QuestionList", () => {
-    const component = render(<QuestionList title="test" questions={[]} />);
+    const component = render(
+      <QuestionList titles={["test"]} questions={{ 0: [] }} />
+    );
     expect(component).toMatchSnapshot();
   });
 });

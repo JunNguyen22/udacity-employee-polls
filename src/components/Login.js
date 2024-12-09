@@ -1,6 +1,7 @@
 import { connect } from "react-redux";
 import { setAuthedUser } from "../actions/authedUser";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const getErrorMessage = (id, password) => {
   if (!id || !password) {
@@ -9,7 +10,16 @@ const getErrorMessage = (id, password) => {
   return "Incorrect User or Password, please try again.";
 };
 
-const Login = ({ dispatch }) => {
+const withRouter = (Component) => {
+  const ComponentWithRouterProp = (props) => {
+    let navigate = useNavigate();
+    return <Component {...props} router={{ navigate }} />;
+  };
+
+  return ComponentWithRouterProp;
+};
+
+const Login = ({ dispatch, router }) => {
   const [id, setId] = useState("");
   const [password, setPassword] = useState("");
   const [isSubmitted, setIsSubmitted] = useState(false);
@@ -19,8 +29,9 @@ const Login = ({ dispatch }) => {
     setIsSubmitted(true);
     setErrorMessage(getErrorMessage(id, password));
     if (id && password) {
+      dispatch(setAuthedUser({ id, password }));
+      router.navigate("/");
     }
-    dispatch(setAuthedUser({ id, password }));
   };
 
   return (
@@ -54,7 +65,7 @@ const Login = ({ dispatch }) => {
 
 const mapStateToProps = () => ({});
 
-export default connect(mapStateToProps)(Login);
+export default withRouter(connect(mapStateToProps)(Login));
 
 export const forTestings = {
   getErrorMessage,

@@ -6,6 +6,7 @@ import middleware from "../middleware";
 import { createStore } from "redux";
 import "@testing-library/jest-dom";
 import { forTestings } from "./Login";
+import { BrowserRouter as Router } from "react-router-dom";
 
 const store = createStore(reducer, middleware);
 
@@ -13,7 +14,9 @@ describe("Login", () => {
   it("snapshot Login", () => {
     const component = render(
       <Provider store={store}>
-        <Login />
+        <Router>
+          <Login />
+        </Router>
       </Provider>
     );
     expect(component).toMatchSnapshot();
@@ -22,7 +25,9 @@ describe("Login", () => {
   it("error message should show if User or Password isn't filled", async () => {
     const component = render(
       <Provider store={store}>
-        <Login />
+        <Router>
+          <Login />
+        </Router>
       </Provider>
     );
 
