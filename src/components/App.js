@@ -10,35 +10,15 @@ import Question from "./Question";
 import Leaderboard from "./Leaderboard";
 import NewQuestion from "./NewQuestion";
 import Login from "./Login";
-import { withLoggedIn } from "../utils/guard";
 import NotFound from "./NotFound";
+import Guard from "./Guard";
+import QuestionFinder from "./QuestionFinder";
 
 const App = ({ dispatch, isAuthenticated, loadingBar }) => {
   const isLoading = loadingBar.default === 1;
   useEffect(() => {
     dispatch(handleInitialData());
   }, []);
-
-  const QuestionsWithGuard = withLoggedIn(
-    Questions,
-    isAuthenticated,
-    ROUTES.LOGIN
-  );
-  const QuestionWithGuard = withLoggedIn(
-    Question,
-    isAuthenticated,
-    ROUTES.NOT_FOUND
-  );
-  const NewQuestionWithGuard = withLoggedIn(
-    NewQuestion,
-    isAuthenticated,
-    ROUTES.LOGIN
-  );
-  const LeaderboardWithGuard = withLoggedIn(
-    Leaderboard,
-    isAuthenticated,
-    ROUTES.LOGIN
-  );
 
   return (
     <Fragment>
@@ -63,21 +43,39 @@ const App = ({ dispatch, isAuthenticated, loadingBar }) => {
               <Route
                 caseSensitive
                 path={ROUTES.LEADER_BOARD}
-                element={LeaderboardWithGuard()}
+                element={
+                  <Guard>
+                    <Leaderboard />
+                  </Guard>
+                }
               />
               <Route
                 caseSensitive
                 path={ROUTES.QUESTIONS}
-                element={QuestionsWithGuard()}
+                element={
+                  <Guard>
+                    <Questions />
+                  </Guard>
+                }
               />
               <Route
                 caseSensitive
                 path={ROUTES.QUESTION}
-                element={QuestionWithGuard()}
+                element={
+                  <Guard>
+                    <QuestionFinder>
+                      <Question />
+                    </QuestionFinder>
+                  </Guard>
+                }
               />
               <Route
                 path={ROUTES.NEW_QUESTION}
-                element={NewQuestionWithGuard()}
+                element={
+                  <Guard>
+                    <NewQuestion />
+                  </Guard>
+                }
               />
               <Route
                 path="/"

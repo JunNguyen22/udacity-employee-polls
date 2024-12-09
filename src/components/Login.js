@@ -19,7 +19,7 @@ const withRouter = (Component) => {
   return ComponentWithRouterProp;
 };
 
-const Login = ({ dispatch, router }) => {
+const Login = ({ dispatch, router, route }) => {
   const [id, setId] = useState("");
   const [password, setPassword] = useState("");
   const [isSubmitted, setIsSubmitted] = useState(false);
@@ -30,7 +30,7 @@ const Login = ({ dispatch, router }) => {
     setErrorMessage(getErrorMessage(id, password));
     if (id && password) {
       dispatch(setAuthedUser({ id, password }));
-      router.navigate("/");
+      router.navigate(route);
     }
   };
 
@@ -63,7 +63,7 @@ const Login = ({ dispatch, router }) => {
   );
 };
 
-const mapStateToProps = () => ({});
+const mapStateToProps = ({ route }) => ({ route });
 
 export default withRouter(connect(mapStateToProps)(Login));
 
